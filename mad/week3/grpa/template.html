@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title> Student Data</title>
+        <meta name="description" content="This page lists Jnanpith Awardees"/>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <div id="intro">
+            <h1> Student Details</h1>
+        </div>
+        <div id="main">
+            <table style="border: 1px solid black;">
+                <thead >
+                    <tr >
+                      <th style="border: 1px solid black;text-align: center;">Student id</th>
+                      <th style="border: 1px solid black;text-align: center;">Course id</th>
+                      <th style="border: 1px solid black;text-align: center;">Marks</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    {% for row in std_list %}
+                    <tr>
+                        <td style="border: 1px solid black;text-align: center;" >{{row[0]}}     </td>
+                        <td style="border: 1px solid black;text-align: center;" >{{row[1]}}     </td>
+                        <td style="border: 1px solid black;text-align: center;" >{{row[2]}}     </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="2" style="border: 1px solid black;text-align: center;">Total Marks </td>
+                        <td style="border: 1px solid black;text-align: center;">{{total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

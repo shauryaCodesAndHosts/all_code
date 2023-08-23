@@ -1,0 +1,47 @@
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+unordered_map<char, int> getCharFrequency(string s) {
+    unordered_map<char, int> freq;
+    for (char ch : s) {
+        freq[ch]++;
+    }
+    return freq;
+}
+
+bool canAvoidSubsequence(string s, string t) {
+    unordered_map<char, int> s_freq = getCharFrequency(s);
+    unordered_map<char, int> t_freq = getCharFrequency(t);
+
+    for (const auto& pair : t_freq) {
+        char ch = pair.first;
+        int freq_t = pair.second;
+
+        if (s_freq.find(ch) == s_freq.end() || s_freq[ch] < freq_t) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        string s, t;
+        cin.ignore(); // Ignore the newline character after reading t.
+        getline(cin, s);
+        getline(cin, t);
+
+        if (canAvoidSubsequence(s, t)) {
+            cout << "YES" << endl;
+        } else {
+            cout << "NO" << endl;
+        }
+    }
+
+    return 0;
+}

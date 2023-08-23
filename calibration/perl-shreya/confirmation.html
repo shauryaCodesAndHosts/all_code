@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmation</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Calibration Data Submitted</h1>
+    <p>
+      Thank you for submitting the calibration data. The following information has been received:
+    </p>
+    <div class="mb-3">
+      <strong>Plant:</strong> <span id="plantData"></span>
+    </div>
+    <div class="mb-3">
+      <strong>Area:</strong> <span id="areaData"></span>
+    </div>
+    <div class="mb-3">
+      <strong>Part Type:</strong> <span id="partTypeData"></span>
+    </div>
+    <div class="mb-3">
+      <strong>Part Unique No.:</strong> <span id="partUniqueNoData"></span>
+    </div>
+    <div class="mb-3">
+      <strong>Calibration Days:</strong> <span id="calibrationDaysData"></span>
+    </div>
+    <div class="mb-3">
+      <strong>Remarks:</strong> <span id="remarksData"></span>
+    </div>
+    <div class="mb-3">
+      <strong>Remaining Days:</strong> <span id="remainingDaysData"></span>
+    </div>
+    <a href="index.html" class="btn btn-primary">Go Back</a>
+  </div>
+
+  <!-- Bootstrap JS and Custom Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Retrieve the submitted data from the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const plant = urlParams.get('plant');
+    const area = urlParams.get('area');
+    const partType = urlParams.get('partType');
+    const partUniqueNo = urlParams.get('partUniqueNo');
+    const calibrationDays = urlParams.get('calibrationDays');
+    const remarks = urlParams.get('remarks');
+    const remainingDays = urlParams.get('remainingDays');
+
+    // Display the submitted data on the confirmation page
+    document.getElementById('plantData').textContent = plant;
+    document.getElementById('areaData').textContent = area;
+    document.getElementById('partTypeData').textContent = partType;
+    document.getElementById('partUniqueNoData').textContent = partUniqueNo;
+    document.getElementById('calibrationDaysData').textContent = calibrationDays;
+    document.getElementById('remarksData').textContent = remarks;
+    document.getElementById('remainingDaysData').textContent = remainingDays;
+  </script>
+</body>
+</html>

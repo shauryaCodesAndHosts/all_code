@@ -1,0 +1,40 @@
+!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title> Jnanpith </title>
+        <meta name="description" content="This page lists Jnanpith Awardees"/>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <div id="intro">
+            <h1> Jnanpith </h1>
+            Bharatiya Jnanpith is a literary organization based in Delhi. It also presents highest literary awards in India.
+        </div>
+        <div id="main">
+            <h1> Awardees </h1>
+            <table >
+                <thead  ">
+                    <tr>
+                      <th >Year</th>
+                      <th >Awardees</th>
+                      <th >Language</th>
+                  </tr>
+                </thead>
+                <tbody >
+                    {% for dict in dict_data %}
+                    <tr>
+                        <td>{{dict['year']}}     </td>
+                        <td>{{dict['awardees']}}     </td>
+                        <td>{{dict['language']}}     </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="footer">
+            <h1> Credit </h1>
+            Data source: <a href="https://en.wikipedia.org/wiki/Jnanpith_Award">Wikipedia</a>
+        </div>
+    </body>
+</html>

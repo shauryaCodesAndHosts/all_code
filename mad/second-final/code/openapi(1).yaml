@@ -1,0 +1,389 @@
+openapi: 3.0.3
+info:
+  title: Grocery Store API
+  description: API documentation for managing products and categories in a grocery store.
+  version: 1.0.0
+  contact : 
+    name : Shaurya Yamdagni
+    email : shauryayamdagni0@gmail.com
+    url : https://shaurya-yamdagni.me
+
+servers:
+  - url: http://localhost:5002
+
+tags:              # Define your global tags here
+  - name: Products
+    description: Operations related to products
+  - name : Products advanced
+    description : Operations to perform CRUD on a specific product
+  - name : Categories 
+  - name : Categories advanced
+  - name : Categories and Products
+
+
+paths:
+  /api/manager/products:
+    description : to view and update manager
+    get:
+      description: to get all products 
+      summary: Get all products
+      operationId: getAllProducts
+      tags : 
+        - Products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: product
+                type: object
+                properties:
+                  productId : 
+                    type: integer
+                    example: 201
+                  productName:
+                    type: string
+                    example: Milk
+                  expiryDate:
+                    type: string
+                    example: 10-Aug-2023
+                  manufacturingDate:
+                    type: string 
+                    example: 10-Aug-2023
+                  ratePerUnit:
+                    type: number
+                    example: 100
+                  categoryId : 
+                    type: number
+                    example: 2
+                  inStock : 
+                    type: integer
+                    example: 100
+                  timeOfEntry: 
+                    type: string
+                    example: "1691374918.82405"
+        '404':
+          description: Not Found
+        '201':
+           description : Not 
+    post:
+      summary: Create a new product
+      description : To add a new product 
+      operationId : addnewProduct
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref : '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product created successfully
+          content:
+            application/json:
+              example: {'message': 'Product created successfully'}
+  /api/manager/products/{productId} :
+    description : to work on a specific product 
+    get :
+      operationId : Details_about_product
+      tags : 
+        - Products advanced
+      parameters :
+        - name : productId
+          in : path
+          description : ID of the product to send info about 
+          required : true 
+          schema : 
+            type : integer
+      responses:
+        '200' : 
+          description : Successfful response 
+          content : 
+            application/json:
+              example: { 'prodcuttName' : "sample", .... }
+      description : to get the information based on a product Id
+
+    put : 
+      operationId : Update_details
+      summary : update details of the product 
+      description : to update the details of the given product 
+      tags : 
+        - Products advanced
+      parameters :
+        - name : productId
+          in : path
+          description : ID of the product to send info about 
+          required : true 
+          schema : 
+            type : integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses : 
+        '200':
+          description : Product updated successfully 
+          content: 
+            application/json : 
+              example : { " message" : " Product updated successfully  " }
+        '404':
+          description : Not found  
+          content: 
+            application/json : 
+              example : { " message" : " Product updated successfully  " }
+
+    delete : 
+      operationId : delete_product 
+      summary : delete the Product by ProductId
+      description : jj
+      tags : 
+        - Products advanced 
+      parameters : 
+        - name : productId
+          in : path
+          description : ID of the product to send info about 
+          required : true 
+          schema : 
+            type : integer
+      responses : 
+        '200':
+          description : Product updated successfully 
+          content: 
+            application/json : 
+              example : { " message" : " Product updated successfully  " }
+        '404':
+          description : Not found  
+          content: 
+            application/json : 
+              example : { " message" : " Product updated successfully  " }
+  /api/manager/categories:
+    description : to view and update manager
+    get:
+      description: to get all categories 
+      summary: Get all categories
+      operationId: get_all_categories
+      tags : 
+        - Categories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: category
+                type: object
+                properties:
+                  categoryId : 
+                    type: integer
+                    example: 201
+                  categoryName:
+                    type: string
+                    example: Milk
+        '404':
+          description: Not Found
+        '201':
+           description : Not 
+    post:
+      summary: Create a new category
+      description : To add a new category 
+      operationId : addNewCategory
+      tags:
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref : '#/components/schemas/Category'
+      responses:
+        '201':
+          description: Category created successfully
+          content:
+            application/json:
+              example: {'message': 'category created successfully'}
+  /api/manager/categories/{categoryId} :
+    description : to get update and delete the given categories 
+    get:
+      operationId : Details_about_category
+      summary : to get the Category 
+      tags : 
+        - Categories advanced
+      parameters :
+        - name : categoryId
+          in : path
+          description : ID of the category to send info about 
+          required : true 
+          schema : 
+            type : integer
+      responses:
+        '200' : 
+          description : Successfful response 
+          content : 
+            application/json:
+              example: { 'categoryName' : "sample", .... }
+      description : to get the information based on a category Id
+    put : 
+      operationId : Change_categoryName
+      summary : update details of the category 
+      description : to update the details of the given category
+      tags : 
+        - Categories advanced
+      parameters :
+        - name : categoryId
+          in : path
+          description : ID of category to send info about 
+          required : true 
+          schema : 
+            type : integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses : 
+        '200':
+          description : Category updated successfully 
+          content: 
+            application/json : 
+              example : { " message" : " Category Name updated successfully  " }
+        '404':
+          description : Not found  
+          content: 
+            application/json : 
+              example : { " message" : " Category not found   " }
+    delete: 
+      operationId : delete_category 
+      summary : delete the Category by categoryId
+      description : to delete the empty category 
+      tags : 
+        - Categories advanced 
+      parameters : 
+        - name : categoryId
+          in : path
+          description : ID of the category to delete 
+          required : true 
+          schema : 
+            type : integer
+      responses : 
+        '200':
+          description : Category deleted successfully 
+          content: 
+            application/json : 
+              example : { " message" : "category deleted successfully  " }
+        '404':
+          description : Not found  
+          content: 
+            application/json : 
+              example : { " message" : " Category not found " }
+  
+  /api/manager/categoriesProduct/{categoryId}/{productId}:
+    description: to get details of the product with specific categoryId and productId
+    get: 
+      operationId : product-category
+      summary : to get specific product by productId and category id
+      description : to get specific product by productId and category id
+      tags : 
+        - Categories and Products 
+      parameters : 
+        - name : categoryId
+          in : path 
+          description : represents category id 
+          required : true 
+          schema :
+            type : integer
+        - name : productId
+          in : path 
+          description : represents product id 
+          required : true 
+          schema :
+            type : integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: product
+                type: object
+                properties:
+                  productId : 
+                    type: integer
+                    example: 201
+                  productName:
+                    type: string
+                    example: Milk
+                  expiryDate:
+                    type: string
+                    example: 10-Aug-2023
+                  manufacturingDate:
+                    type: string 
+                    example: 10-Aug-2023
+                  ratePerUnit:
+                    type: number
+                    example: 100
+                  categoryId : 
+                    type: number
+                    example: 2
+                  inStock : 
+                    type: integer
+                    example: 100
+                  timeOfEntry: 
+                    type: string
+                    example: "1691374918.82405"
+        '404':
+          description: Not Found
+        '201':
+           description : Not 
+            
+
+
+
+        
+        
+        
+        
+        
+              
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        productName:
+          type: string
+        expiryDate:
+          type: string
+          format: date
+        manufacturingDate:
+          type: string
+          format: date
+        ratePerUnit:
+          type: number
+        categoryId:
+          type: integer
+        inStock:
+          type: boolean
+        timeOfEntry:
+          type: string
+          format: date-time
+      required:
+        - productName
+        - expiryDate
+        - manufacturingDate
+        - ratePerUnit
+        - categoryId
+        - inStock
+        - timeOfEntry
+    Category : 
+      type : object 
+      properties: 
+        categoryName : 
+          type : string 
+      required : 
+        - categoryName

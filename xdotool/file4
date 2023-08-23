@@ -1,0 +1,24 @@
+import heapq
+
+def getNumberofDroppedPackets(requests, max_packets, rate):
+    dropped_packets = 0
+    queue = []
+    current_time = 0
+
+    for req in requests:
+        req_time, req_packets = req[0], req[1]
+
+        while queue and queue[0][0] <= req_time:
+            heapq.heappop(queue)
+
+        available_capacity = max_packets - sum(packet[1] for packet in queue)
+
+        if available_capacity < req_packets:
+            dropped_packets += req_packets - available_capacity
+            req_packets = available_capacity
+
+        if req_packets > 0:
+            delivery_time = req_time + (req_packets - 1) // rate + 1
+            heapq.heappush(queue, (delivery_time, req_packets))
+
+    return dropped_packets

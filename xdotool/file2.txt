@@ -1,0 +1,29 @@
+from collections import defaultdict
+
+def getMinOperations(network_series):
+    graph = defaultdict(list)
+    for i in range(len(network_series) - 1):
+        if network_series[i] != network_series[i + 1]:
+            graph[network_series[i]].append(network_series[i + 1])
+
+    operations = 0
+    visited = set()
+    for node in network_series:
+        if node not in visited:
+            visited.add(node)
+            stack = [node]
+            unique_letters = set(node)
+            while stack:
+                current_node = stack.pop()
+                for neighbor in graph[current_node]:
+                    if neighbor not in visited:
+                        visited.add(neighbor)
+                        stack.append(neighbor)
+                        unique_letters.add(neighbor)
+            operations += len(unique_letters) - 1
+
+    return operations
+
+network_series = input("")
+min_operations = getMinOperations(network_series) + 1
+print(min_operations)

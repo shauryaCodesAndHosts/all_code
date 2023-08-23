@@ -1,0 +1,27 @@
+class reversor:
+    def __init__(self, obj):
+        self.obj = obj
+ 
+    def __eq__(self, other):
+        return other.obj == self.obj
+ 
+    def __lt__(self, other):
+           return other.obj < self.obj
+       
+    def __gt__(self, other):
+        return self.obj > other.obj
+ 
+def solve(N, points):
+    return sorted(points, key=lambda x: (x[0], reversor(x[1])))
+ 
+ 
+N = int(input())
+ 
+points = [list(map(int, input().split())) for i in range(N)]
+ 
+ 
+ 
+out_ = solve(N, points)
+ 
+for i_out_ in out_:
+    print(' '.join(map(str, i_out_)))

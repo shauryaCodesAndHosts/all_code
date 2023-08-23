@@ -1,0 +1,18 @@
+def maximize_points(R, markers):
+    dp = [[0] * R for _ in range(R)]
+
+    for i in range(R):
+        dp[i][i] = markers[i]
+
+    for d in range(1, R):
+        for i in range(R - d):
+            j = i + d
+            dp[i][j] = max(markers[i] + dp[i + 1][j], markers[j] + dp[i][j - 1])
+
+    return dp[0][R - 1]
+
+# Example usage:
+R = 4
+markers = [20, 2, 10, 11]
+max_points = maximize_points(R, markers)
+print(max_points)

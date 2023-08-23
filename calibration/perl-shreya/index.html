@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calibration of Tools</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Calibration of Tools</h1>
+    <form id="calibrationForm" action="submit_form.py" method="post">
+      <div class="mb-3">
+        <label for="plant">Plant:</label>
+        <select class="form-select" id="plant" onchange="updateAreaOptions()" name="plant">
+          <option value="">Select Plant</option>
+          <option value="a">Plant A</option>
+          <option value="b">Plant B</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="area">Area:</label>
+        <select class="form-select" id="area" name="area">
+          <option value="">Select Area</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="partType">Part Type:</label>
+        <select class="form-select" id="partType" name="partType">
+          <option value="">Select Part Type</option>
+          <option value="x">X</option>
+          <option value="y">Y</option>
+          <option value="z">Z</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="partUniqueNo">Part Unique No.:</label>
+        <input type="text" class="form-control" id="partUniqueNo" name="partUniqueNo">
+      </div>
+      <div class="mb-3">
+        <label for="calibrationDays">Calibration Days:</label>
+        <input type="number" class="form-control" id="calibrationDays" name="calibrationDays">
+      </div>
+      <div class="mb-3">
+        <label for="remarks">Remarks:</label>
+        <textarea class="form-control" id="remarks" name="remarks"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS and Custom Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="custom.js"></script>
+</body>
+</html>

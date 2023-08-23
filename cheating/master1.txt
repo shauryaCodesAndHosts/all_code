@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+int ans = 0;
+ 
+// Function to generate all possible combination
+void find(int i, vector<int>& digits, int mask, int k)
+{
+    // Base case
+    if (i == digits.size())
+        return;
+ 
+    // Store the ans for current state of mask
+    int temp = 0;
+    int pow_of_10 = 1;
+    for (int j = digits.size() - 1; j >= 0; j--) {
+        int k = pow(2, j);
+ 
+        // If the bit is 1 means current element
+        // is removed in that state
+        if (!(mask & k)) {
+            temp = temp + pow_of_10 * digits[j];
+            pow_of_10 *= 10;
+        }
+    }
+    if (temp > k) {
+        ans = min(ans, temp);
+    }
+    int next = pow(2, i);
+    find(i + 1, digits, mask, k);
+    find(i + 1, digits, mask | next, k);
+}
+ 
+// Function to find number less than N greater than K
+int GreaterthanK(int N, int K)
+{
+    // Array to store digits of N
+    vector<int> digits;
+    int M = N;
+    while (M) {
+        digits.push_back(M % 10);
+        M /= 10;
+    }
+    reverse(digits.begin(), digits.end());
+    ans = N;
+    find(0, digits, 0, K);
+    return ans;
+}
+ 
+// Driver code
+int main()
+{
+    int N = 121230;
+    int K = 756;
+ 
+    // Function call
+    cout << (GreaterthanK(N, K)) << endl;
+    return 0;
+}

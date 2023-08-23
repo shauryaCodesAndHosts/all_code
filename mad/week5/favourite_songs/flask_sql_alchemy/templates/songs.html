@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> All Songs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class = 'container'>
+
+      <div class="jumbotron" >
+        <h1 class="display-4">Songs</h1>
+      </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        {% for key,value in singers.items() %}
+        <div>
+          <a href="/singer/{{key}}"><h2>{{key}} </h2></a>
+            {% for x in value %}
+              <h3>
+                <p>{{x.name}}</p>
+              </h3>
+                <p>{{x.Lyrics}}</p>
+            {% endfor %}
+          <div>            
+            
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="col-md-4">
+        Sidebar
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
+</html>
