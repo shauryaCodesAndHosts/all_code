@@ -101,7 +101,14 @@ def updateDateFinal():
                                   "%d-%m-%Y")
     daysPassed = todayDate - dateToStartSubract
     daysLeft = reminderInDays - daysPassed
-    daysLeft = int(str(daysLeft).replace("days, 0:00:00", ""))
+    print('daysleft =', daysLeft)
+    
+    if (str(daysLeft)) == '0:00:00':
+      daysLeft = 0
+    elif(str(daysLeft)[-10]) == 's':
+      daysLeft = int(str(daysLeft).replace("days, 0:00:00", ""))
+    else:
+      daysLeft = int(str(daysLeft).replace("day, 0:00:00", ""))
     if (int(form.reminderInDays) >= daysLeft):
       form.reminderInDays = daysLeft
     if (int(form.reminderInDays) <= 0):
