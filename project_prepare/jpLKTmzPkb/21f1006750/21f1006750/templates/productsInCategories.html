@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mx-3">
+        <a class="navbar-brand" href="/customerDashboard">Grocery Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/customerDashboard">Home <span class="sr-only">(current)</span></a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/customerDashboard/allCategories">All Categories</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/displayCart">Cart</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/yourOrders">Orders</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Hello !! {{current_user.customerLastName}} {{current_user.customerLastName}}  </a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/customerLogout">Logout</a>
+            </li>
+
+          </ul>
+
+                  <form class="form-inline my-2 my-lg-0" method="POST" action="/searchResult">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" required>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+        </div>
+      </nav>
+
+
+
+
+
+
+    <div class="mx-4"><h1>All products in {{category.categoryName}}</h1></div>
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+          {% for product in category.product %}
+            <div class="col-md-4">
+              <div class="card my-4">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.productName }}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">₹ {{product.ratePerUnit}}</h6>
+                  <p class="card-text"> Manufacturing Date : {{product.manufacturingDate}}</p>
+                  <p class="card-text"> Expiry Date : {{product.expiryDate}}</p>
+                  <p class="card-text"> Items in Stock : {{product.inStock}}</p>
+                  <form method="POST" action="/addToCart" >
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Quantity</label>
+                        <select id="state" class="form-select" name="quantity" >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                      </div>
+                      <input type="hidden" name="categoryId" value="{{category.categoryId}}">
+                      <input type="hidden" name="productId" value="{{product.productId}}">
+
+                      <button type="submit" class="btn btn-primary">Add to cart</button>
+
+
+                  </form>
+                  <!-- <a href="/#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a> -->
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+
+
+      </div>
+  </body>
+</html>
