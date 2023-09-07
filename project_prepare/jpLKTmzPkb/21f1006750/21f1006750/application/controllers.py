@@ -10,10 +10,7 @@ from sqlalchemy import func
 import time
 import matplotlib
 import matplotlib.pyplot as plt
-#from matplotlib import pyplot as plt
-#from .controllers import login_manager
 from flask_login import login_user, login_required, logout_user, current_user, LoginManager
-#from flask_bcrypt import Bcrypt
 
 #login_manager = LoginManager()
 #login_manager.init_app(app)
@@ -21,10 +18,11 @@ from flask_login import login_user, login_required, logout_user, current_user, L
 
 login_manager = LoginManager()
 # allows our app to handle things like loggin in
-login_manager.init_app(app)
-login_manager.login_view='customerLogin'
+login_manager.init_app(app) # connects our app to the login manager 
+login_manager.login_view='customerLogin' #users will be redirected to this if they try to access the resource not meant for them 
 
-now_user = None
+
+#now_user = None
 
 @login_manager.user_loader
 def load_Customer(customerId):
@@ -76,7 +74,7 @@ def customerLogin():
                 if  bcrypt.check_password_hash(customer__original.customerUserPassword, UserPassword):
                     login_user(customer__original)
                     print(current_user.customerId)
-                    print(now_user)
+                    #print(now_user)
                     return redirect(url_for('customerDashboard'))
                     return render_template('test.html',current_user=now_user)
 
@@ -208,10 +206,7 @@ def addToCart():
                                     productId = product.productId)
             db.session.add(new_cart)
             db.session.commit()
-        #return "true"
         return redirect(url_for('productInCategories',categoryName=category.categoryName))
-
-
 
 @app.route('/displayCart/<cartItemId>',methods=['GET'])
 @login_required
@@ -499,7 +494,6 @@ def performanceOfProducts():
     plt.legend()
     plt.savefig('./static/horizontal_bar_graph.png', bbox_inches='tight')
     plt.clf()
-
     active_customers = (
     db.session.query(CustomerOrders.customerId, func.count(CustomerOrders.orderId).label('order_count'))
     .group_by(CustomerOrders.customerId)
@@ -522,6 +516,4 @@ def performanceOfProducts():
     plt.legend()
     plt.savefig('./static/horizontal_bar_graph_customers.png', bbox_inches='tight')
     plt.clf()
-
     return render_template('diagnostic.html')
-
